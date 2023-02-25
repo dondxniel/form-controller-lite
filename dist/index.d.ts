@@ -16,4 +16,4 @@ interface FormControllerProps extends Omit<HTMLProps<HTMLFormElement>, "onSubmit
 
 declare const FormController: ({ children, onSubmit, defaultValues, handleBeforeChange, handleAfterChange, handleBeforeSubmit, handleAfterSubmit, ...props }: FormControllerProps) => JSX.Element;
 
-export { FormController };
+export { FormController, FormControllerProps };
