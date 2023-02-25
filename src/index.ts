@@ -1,1 +1,1 @@
-export * as FormController from "./components/FormController";
+export { FormController } from "./components/FormController";

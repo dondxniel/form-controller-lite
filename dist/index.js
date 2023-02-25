@@ -59,7 +59,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
-  default: () => src_default
+  FormController: () => FormController
 });
 module.exports = __toCommonJS(src_exports);
 
@@ -121,8 +121,7 @@ var FormController = (_a) => {
     children
   );
 };
-
-// src/index.ts
-var src_default = FormController;
 // Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+0 && (module.exports = {
+  FormController
+});
