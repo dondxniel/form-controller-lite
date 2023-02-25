@@ -3,11 +3,14 @@ import { ChangeEventType, Element, FormEventType } from "./types";
 
 export interface FormControllerProps
 	extends Omit<HTMLProps<HTMLFormElement>, "onSubmit"> {
+	// * Compulsory props
 	children: Element;
 	onSubmit: (event: FormEventType, formData: any) => void;
-	defaultValues: any;
-	handleBeforeChange: (event: ChangeEventType) => boolean;
-	handleAfterChange: (event: ChangeEventType) => void;
-	handleBeforeSubmit: (event: FormEventType) => boolean;
-	handleAfterSubmit: (event: FormEventType) => void;
+
+	// * Optional props
+	defaultValues?: any;
+	handleBeforeChange?: (event: ChangeEventType) => boolean;
+	handleAfterChange?: (event: ChangeEventType) => void;
+	handleBeforeSubmit?: (event: FormEventType) => boolean;
+	handleAfterSubmit?: (event: FormEventType) => void;
 }

@@ -1,2 +1,1 @@
-import { FormController } from "./components/FormController";
-export default FormController;
+export * as FormController from "./components/FormController";
