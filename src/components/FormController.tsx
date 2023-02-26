@@ -4,7 +4,7 @@ import { ChangeEventType, FormEventType } from "../interfaces/types";
 
 export const FormController = ({
 	children,
-	onSubmit = (e: FormEventType, formData: any) => null,
+	onSubmit = (formData: any, e: FormEventType) => null,
 	defaultValues = {},
 	handleBeforeChange = (e: ChangeEventType) => true,
 	handleAfterChange = (e: ChangeEventType) => null,
@@ -18,7 +18,7 @@ export const FormController = ({
 
 	const mirrorHandleSubmit = (e: FormEventType) => {
 		e.preventDefault();
-		if (handleBeforeSubmit(e)) onSubmit(e, formData);
+		if (handleBeforeSubmit(e)) onSubmit(formData, e);
 		handleAfterSubmit(e);
 	};
 
