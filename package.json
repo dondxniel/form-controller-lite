@@ -1,6 +1,6 @@
 {
 	"name": "form-controller-lite",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"description": "Handling form state and events with React.",
 	"main": "dist/index.js",
 	"author": "Daniel Don",
