@@ -9,19 +9,14 @@ export const FormController = ({
 	handleBeforeChange = (e: ChangeEventType) => true,
 	handleAfterChange = (e: ChangeEventType) => null,
 	handleBeforeSubmit = (e: FormEventType) => true,
-	handleAfterSubmit = (e: FormEventType) => null,
 	...props
 }: FormControllerProps) => {
 	const formRef = useRef<HTMLFormElement>(null);
-
 	const [formData, formDataSetter] = useState({ ...defaultValues });
-
 	const mirrorHandleSubmit = (e: FormEventType) => {
 		e.preventDefault();
 		if (handleBeforeSubmit(e)) onSubmit(formData, e);
-		handleAfterSubmit(e);
 	};
-
 	const handleChange = (e: any) => {
 		if (handleBeforeChange(e))
 			formDataSetter({
@@ -30,7 +25,6 @@ export const FormController = ({
 			});
 		handleAfterChange(e);
 	};
-
 	const handleAssignValues = () => {
 		if (formRef.current?.elements) {
 			for (const key in formRef.current?.elements) {
@@ -47,11 +41,9 @@ export const FormController = ({
 			}
 		}
 	};
-
 	useEffect(() => {
 		handleAssignValues();
 	});
-
 	return (
 		<form
 			onChange={handleChange}
