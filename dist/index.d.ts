@@ -6,14 +6,14 @@ type ChangeEventType = ChangeEvent<HTMLInputElement>;
 
 interface FormControllerProps extends Omit<HTMLProps<HTMLFormElement>, "onSubmit"> {
     children: Element;
-    onSubmit: (event: FormEventType, formData: any) => void;
+    onSubmit?: (event: FormEventType, formData: any) => void;
+    clearAfterSubmit: boolean;
     defaultValues?: any;
     handleBeforeChange?: (event: ChangeEventType) => boolean;
     handleAfterChange?: (event: ChangeEventType) => void;
     handleBeforeSubmit?: (event: FormEventType) => boolean;
-    handleAfterSubmit?: (event: FormEventType) => void;
 }
 
-declare const FormController: ({ children, onSubmit, defaultValues, handleBeforeChange, handleAfterChange, handleBeforeSubmit, handleAfterSubmit, ...props }: FormControllerProps) => JSX.Element;
+declare const FormController: ({ children, clearAfterSubmit, onSubmit, defaultValues, handleBeforeChange, handleAfterChange, handleBeforeSubmit, ...props }: FormControllerProps) => JSX.Element;
 
 export { FormController, FormControllerProps };

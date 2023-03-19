@@ -68,28 +68,41 @@ var import_react = __toESM(require("react"));
 var FormController = (_a) => {
   var _b = _a, {
     children,
-    onSubmit = (e, formData) => null,
+    clearAfterSubmit = false,
+    onSubmit = (formData, e) => null,
     defaultValues = {},
     handleBeforeChange = (e) => true,
     handleAfterChange = (e) => null,
-    handleBeforeSubmit = (e) => true,
-    handleAfterSubmit = (e) => null
+    handleBeforeSubmit = (e) => true
   } = _b, props = __objRest(_b, [
     "children",
+    "clearAfterSubmit",
     "onSubmit",
     "defaultValues",
     "handleBeforeChange",
     "handleAfterChange",
-    "handleBeforeSubmit",
-    "handleAfterSubmit"
+    "handleBeforeSubmit"
   ]);
   const formRef = (0, import_react.useRef)(null);
   const [formData, formDataSetter] = (0, import_react.useState)(__spreadValues({}, defaultValues));
+  const clearAfterSubmitHandler = () => {
+    if (clearAfterSubmit) {
+      let keys = Object.keys(formData);
+      if (keys.length) {
+        keys.forEach((item) => {
+          formDataSetter(__spreadProps(__spreadValues({}, formData), {
+            [item]: null
+          }));
+        });
+      }
+    }
+  };
   const mirrorHandleSubmit = (e) => {
     e.preventDefault();
-    if (handleBeforeSubmit(e))
-      onSubmit(e, formData);
-    handleAfterSubmit(e);
+    if (handleBeforeSubmit(e)) {
+      onSubmit(formData, e);
+      clearAfterSubmitHandler();
+    }
   };
   const handleChange = (e) => {
     if (handleBeforeChange(e))
@@ -110,7 +123,7 @@ var FormController = (_a) => {
   };
   (0, import_react.useEffect)(() => {
     handleAssignValues();
-  });
+  }, []);
   return /* @__PURE__ */ import_react.default.createElement(
     "form",
     __spreadValues({
