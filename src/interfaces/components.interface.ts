@@ -8,6 +8,7 @@ export interface FormControllerProps
 	onSubmit?: (event: FormEventType, formData: any) => void;
 
 	// * Optional props
+	clearAfterSubmit: boolean;
 	defaultValues?: any;
 	handleBeforeChange?: (event: ChangeEventType) => boolean;
 	handleAfterChange?: (event: ChangeEventType) => void;

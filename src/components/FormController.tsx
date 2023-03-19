@@ -4,6 +4,7 @@ import { ChangeEventType, FormEventType } from "../interfaces/types";
 
 export const FormController = ({
 	children,
+	clearAfterSubmit = false,
 	onSubmit = (formData: any, e: FormEventType) => null,
 	defaultValues = {},
 	handleBeforeChange = (e: ChangeEventType) => true,
@@ -13,10 +14,32 @@ export const FormController = ({
 }: FormControllerProps) => {
 	const formRef = useRef<HTMLFormElement>(null);
 	const [formData, formDataSetter] = useState({ ...defaultValues });
+
+	// clears the form if the prop receives a true boolean
+	const clearAfterSubmitHandler = () => {
+		if (clearAfterSubmit) {
+			let keys = Object.keys(formData);
+			if (keys.length) {
+				keys.forEach((item: string) => {
+					formDataSetter({
+						...formData,
+						[item]: null,
+					});
+				});
+			}
+		}
+	};
+
+	// wraps the submit handler
 	const mirrorHandleSubmit = (e: FormEventType) => {
 		e.preventDefault();
-		if (handleBeforeSubmit(e)) onSubmit(formData, e);
+		if (handleBeforeSubmit(e)) {
+			onSubmit(formData, e);
+			clearAfterSubmitHandler();
+		}
 	};
+
+	// calls every time a change event occurs
 	const handleChange = (e: any) => {
 		if (handleBeforeChange(e))
 			formDataSetter({
@@ -25,6 +48,8 @@ export const FormController = ({
 			});
 		handleAfterChange(e);
 	};
+
+	// assign all the required props to the fields
 	const handleAssignValues = () => {
 		if (formRef.current?.elements) {
 			for (const key in formRef.current?.elements) {
@@ -41,9 +66,11 @@ export const FormController = ({
 			}
 		}
 	};
+
 	useEffect(() => {
 		handleAssignValues();
-	});
+	}, []);
+
 	return (
 		<form
 			onChange={handleChange}
