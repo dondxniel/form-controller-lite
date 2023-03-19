@@ -73,6 +73,9 @@ This boolean flag tells if the form needs to clear after the form has been submi
 ```jsx
 function  App() {
 	const [clearForm, setClearForm] = useState(true)
+	const handleSubmit = (values) => {
+		const response = await loginFunction(values);
+	}
 	return (
 		<FormController clearAfterSubmit={clearForm} onSubmit={handleSubmit}>
 			<input name="email" />
